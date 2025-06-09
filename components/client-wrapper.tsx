@@ -3,7 +3,6 @@
 import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import ErrorBoundary from "@/components/error-boundary"
-import PerformanceMonitor from "@/components/performance-monitor"
 
 // Lazy load heavy components with better loading states
 const NeuralMeshBackground = dynamic(() => import("@/components/neural-mesh-background"), {
@@ -66,13 +65,6 @@ export default function ClientWrapper() {
       window.addEventListener("scroll", handleScroll, { passive: true })
     }, 2000)
 
-    // Preload critical resources
-    const preloadLink = document.createElement("link")
-    preloadLink.rel = "preload"
-    preloadLink.href = "https://calendly.com/ujjwal-it2023-24-recabn/15min"
-    preloadLink.as = "document"
-    document.head.appendChild(preloadLink)
-
     return () => {
       clearTimeout(timer)
       window.removeEventListener("scroll", handleScroll)
@@ -99,8 +91,6 @@ export default function ClientWrapper() {
 
   return (
     <ErrorBoundary>
-      <PerformanceMonitor />
-
       <Suspense fallback={<div className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50" />}>
         <NeuralMeshBackground />
       </Suspense>

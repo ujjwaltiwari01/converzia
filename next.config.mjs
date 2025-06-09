@@ -9,11 +9,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
     domains: ['i.ibb.co'],
-    formats: ['image/webp', 'image/avif'],
   },
   compress: true,
   poweredByHeader: false,
-  generateEtags: true,
   
   // Security headers
   async headers() {
@@ -33,10 +31,6 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
         ],
       },
     ]
@@ -53,22 +47,21 @@ const nextConfig = {
     ]
   },
 
-  // Performance optimizations
-  experimental: {
-    optimizeCss: true,
-    scrollRestoration: true,
+  // Remove experimental features that cause issues
+  swcMinify: true,
+  
+  // Webpack configuration for better compatibility
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      }
+    }
+    return config
   },
-
-  // Bundle analyzer (uncomment for analysis)
-  // webpack: (config, { isServer }) => {
-  //   if (!isServer) {
-  //     config.resolve.fallback = {
-  //       ...config.resolve.fallback,
-  //       fs: false,
-  //     }
-  //   }
-  //   return config
-  // },
 }
 
 export default nextConfig

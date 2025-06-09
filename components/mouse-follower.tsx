@@ -12,7 +12,6 @@ export default function MouseFollower() {
     setIsClient(true)
 
     const updateMousePosition = (e: MouseEvent) => {
-      // Direct value setting is more performant than setState
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
     }
@@ -27,7 +26,6 @@ export default function MouseFollower() {
 
   return (
     <>
-      {/* Main cursor follower - optimized for performance */}
       <motion.div
         className="fixed w-6 h-6 bg-gradient-to-r from-indigo-500/40 to-purple-500/40 rounded-full pointer-events-none z-50 mix-blend-multiply"
         style={{
@@ -44,7 +42,6 @@ export default function MouseFollower() {
         }}
       />
 
-      {/* Secondary cursor follower - with slight delay for effect */}
       <motion.div
         className="fixed w-12 h-12 border border-indigo-400/30 rounded-full pointer-events-none z-40"
         style={{

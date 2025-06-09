@@ -19,7 +19,6 @@ export default function FloatingElements() {
     setIsClient(true)
   }, [])
 
-  // Don't render on server or if user prefers reduced motion
   if (!isClient || prefersReducedMotion) return null
 
   return (

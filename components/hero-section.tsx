@@ -5,14 +5,16 @@ import { Play, ArrowRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
+import { event } from "@/lib/gtag"
 
 const VideoModal = dynamic(() => import("./video-modal"), { ssr: false })
 
 export default function HeroSection() {
   const [typedText, setTypedText] = useState("")
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+
   const fullText =
-    "Hi Sarah, I noticed your company just raised Series A. Congratulations! I'd love to show you how we helped TechFlow increase their lead conversion by 38% in just 2 weeks..."
+    "Hi there, Our team found your website recently. I was impressed by your unique furniture designs and commitment to quality craftsmanship. However, I noticed that your online visibility could be optimized for more traffic. In today's competitive market, a weak online presence can lead to missed opportunities and reduced brand awareness, impacting your growth potential and revenue...."
 
   useEffect(() => {
     let index = 0
@@ -30,14 +32,27 @@ export default function HeroSection() {
 
   const handleBookDemo = () => {
     if (typeof window !== "undefined") {
-      window.open("https://calendly.com/ujjwal-it2023-24-recabn/15min", "_blank")
+      // Track analytics event
+      event("click", {
+        event_category: "CTA",
+        event_label: "Hero Book Demo",
+      })
+
+      window.open("https://calendly.com/ujjwal-it2023-24-recabn/15min", "_blank", "noopener,noreferrer")
     }
+  }
+
+  const handleVideoClick = () => {
+    event("click", {
+      event_category: "Video",
+      event_label: "Hero Video Play",
+    })
+    setIsVideoOpen(true)
   }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -51,7 +66,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 backdrop-blur-sm border border-indigo-200/50 rounded-full px-6 py-3 mb-8"
           >
             <Sparkles className="w-5 h-5 text-indigo-600" />
-            <span className="text-indigo-700 font-semibold">⚡ Only 6 demo slots left this week!</span>
+            <span className="text-indigo-700 font-semibold">Only 6 demo slots left this week!</span>
           </motion.div>
 
           <motion.h1
@@ -61,15 +76,15 @@ export default function HeroSection() {
             transition={{ delay: 0.2, duration: 0.8 }}
           >
             <span className="bg-gradient-to-r from-gray-900 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Outreach
+              AI Prospecting
             </span>
             <br />
             <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Reimagined
+              Made For
             </span>
             <br />
             <span className="relative">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">by AI.</span>
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">B2B</span>
               <motion.div
                 className="absolute -bottom-4 left-0 right-0 h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"
                 initial={{ scaleX: 0 }}
@@ -85,7 +100,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            Scalable. Personal. Instant.
+            Reaching your prospect is faster than fetching emails.
           </motion.div>
 
           <motion.p
@@ -94,7 +109,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            Converzia starts real conversations — and follows up like a pro. All powered by AI. All built to close.
+            Thinking Cold Outreach? Send AI-written Personalized Emails in 3 Seconds.
           </motion.p>
 
           <motion.div
@@ -106,7 +121,8 @@ export default function HeroSection() {
             <Button
               onClick={handleBookDemo}
               size="lg"
-              className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-6 rounded-2xl shadow-2xl hover:shadow-indigo-500/25 transition-all duration-300 group text-lg font-semibold"
+              className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-6 rounded-2xl shadow-2xl hover:shadow-indigo-500/25 transition-all duration-300 group text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              aria-label="Book a free demo with Converzia"
             >
               Book My Free Demo
               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
@@ -115,8 +131,9 @@ export default function HeroSection() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => setIsVideoOpen(true)}
-              className="border-2 border-indigo-200 hover:border-indigo-400 text-indigo-600 hover:text-indigo-700 px-10 py-6 rounded-2xl bg-white/60 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 group text-lg font-semibold"
+              onClick={handleVideoClick}
+              className="border-2 border-indigo-200 hover:border-indigo-400 text-indigo-600 hover:text-indigo-700 px-10 py-6 rounded-2xl bg-white/60 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 group text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              aria-label="Watch AI in action video"
             >
               <Play className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
               See AI in Action
@@ -124,7 +141,6 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right Content - Animated Email Mockup */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -132,7 +148,6 @@ export default function HeroSection() {
           className="relative"
         >
           <div className="relative">
-            {/* Glowing background effect */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-3xl"
               animate={{
@@ -146,10 +161,8 @@ export default function HeroSection() {
               }}
             />
 
-            {/* Email Interface Mockup */}
             <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20">
               <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6">
-                {/* Email Header */}
                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
                   <div className="w-3 h-3 bg-red-500 rounded-full" />
                   <div className="w-3 h-3 bg-yellow-500 rounded-full" />
@@ -157,16 +170,15 @@ export default function HeroSection() {
                   <span className="ml-4 text-gray-600 font-medium">AI Email Generator</span>
                 </div>
 
-                {/* Email Composition */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <span className="text-gray-500 text-sm w-12">To:</span>
-                    <span className="text-gray-900 font-medium">sarah@techflow.com</span>
+                    <span className="text-gray-900 font-medium">riya@neofurnitures.co</span>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <span className="text-gray-500 text-sm w-12">Subject:</span>
-                    <span className="text-gray-900 font-medium">Congrats on Series A - Quick question</span>
+                    <span className="text-gray-900 font-medium">10x Your Furniture Website Potential..</span>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
@@ -182,7 +194,6 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* AI Status */}
                   <motion.div
                     className="flex items-center gap-3 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-3"
                     initial={{ opacity: 0 }}
@@ -191,7 +202,7 @@ export default function HeroSection() {
                   >
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                     <span className="text-indigo-700 font-medium text-sm">
-                      AI analyzing brand voice & personalizing...
+                      AI analyzing brand voice and personalizing...
                     </span>
                   </motion.div>
                 </div>
@@ -201,7 +212,6 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
@@ -216,7 +226,6 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Video Modal */}
       <VideoModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}

@@ -29,10 +29,10 @@ const testimonials = [
   },
   {
     quote:
-      "The personalization is incredible. Each email feels like I wrote it myself, but I'm reaching 10x more prospects.",
-    author: "Emily Watson",
-    title: "Business Development",
-    company: "Growth Partners",
+      "I loved the personalized email it generates out of my website data. Each email feels like I wrote it myself, but I'm reaching 15x more prospects daily.",
+    author: "Shashank Gupta",
+    title: "Co-founder",
+    company: "Radian Marketing",
     avatar: "👩‍💻",
     logo: "📈",
     rating: 5,
@@ -47,10 +47,11 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "The ROI is insane. We're closing deals worth $200000+ from emails that took 5 minutes to set up.",
-    author: "Lisa Park",
-    title: "VP Sales",
-    company: "Enterprise Solutions",
+    quote:
+      "I really can't believe how well this tool can get customized. Team is very supportive when it comes to setting up cold outreach for me.",
+    author: "Akul Bharti",
+    title: "Founder",
+    company: "The Perfect Squad",
     avatar: "👩‍🔬",
     logo: "💎",
     rating: 5,
@@ -87,7 +88,6 @@ export default function TestimonialSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          {/* Trust Bar */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -106,7 +106,6 @@ export default function TestimonialSection() {
           </p>
         </motion.div>
 
-        {/* Main Testimonial Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -146,7 +145,6 @@ export default function TestimonialSection() {
               </div>
             </motion.div>
 
-            {/* Navigation */}
             <div className="flex items-center justify-between mt-8">
               <Button variant="ghost" onClick={prevTestimonial} className="p-3 rounded-full hover:bg-indigo-50">
                 <ChevronLeft className="w-6 h-6" />
@@ -171,7 +169,6 @@ export default function TestimonialSection() {
           </Card>
         </motion.div>
 
-        {/* Trust indicators */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}

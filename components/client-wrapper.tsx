@@ -2,42 +2,47 @@
 
 import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
+import ErrorBoundary from "@/components/error-boundary"
+import PerformanceMonitor from "@/components/performance-monitor"
 
-// Use dynamic imports with SSR disabled for components with browser-specific code
+// Lazy load heavy components with better loading states
 const NeuralMeshBackground = dynamic(() => import("@/components/neural-mesh-background"), {
   ssr: false,
   loading: () => <div className="fixed inset-0 bg-gradient-to-br from-indigo-50/50 via-purple-50/30 to-pink-50/50" />,
 })
 
-const MouseFollower = dynamic(() => import("@/components/mouse-follower"), { ssr: false })
-const FloatingElements = dynamic(() => import("@/components/floating-elements"), { ssr: false })
-const CalendlyBadge = dynamic(() => import("@/components/calendly-badge"), { ssr: false })
+const MouseFollower = dynamic(() => import("@/components/mouse-follower"), {
+  ssr: false,
+  loading: () => null,
+})
 
-// Regular imports for components that can be pre-rendered
+const FloatingElements = dynamic(() => import("@/components/floating-elements"), {
+  ssr: false,
+  loading: () => null,
+})
+
+const CalendlyBadge = dynamic(() => import("@/components/calendly-badge"), {
+  ssr: false,
+  loading: () => null,
+})
+
+// Import static components normally for better SEO
 import Navigation from "@/components/navigation"
 import HeroSection from "@/components/hero-section"
+import FlowchartGraphics from "@/components/flowchart-graphics"
 import FeatureSection from "@/components/feature-section"
 import AIFunnelSection from "@/components/ai-funnel-section"
 import UseCasesSection from "@/components/use-cases-section"
 import CTASection from "@/components/cta-section"
 import TestimonialSection from "@/components/testimonial-section"
 
-// Simple loading component
-const LoadingFallback = () => (
-  <div className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center">
-    <div className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-  </div>
-)
-
 export default function ClientWrapper() {
   const [showCalendly, setShowCalendly] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Mark as mounted
     setMounted(true)
 
-    // Optimize scroll listener with requestAnimationFrame
     let ticking = false
     let lastScrollY = 0
 
@@ -56,10 +61,17 @@ export default function ClientWrapper() {
       }
     }
 
-    // Delay adding scroll listener to improve initial load performance
+    // Delay scroll listener to improve initial page load
     const timer = setTimeout(() => {
       window.addEventListener("scroll", handleScroll, { passive: true })
     }, 2000)
+
+    // Preload critical resources
+    const preloadLink = document.createElement("link")
+    preloadLink.rel = "preload"
+    preloadLink.href = "https://calendly.com/ujjwal-it2023-24-recabn/15min"
+    preloadLink.as = "document"
+    document.head.appendChild(preloadLink)
 
     return () => {
       clearTimeout(timer)
@@ -67,13 +79,14 @@ export default function ClientWrapper() {
     }
   }, [])
 
-  // Render a simpler version during SSR and initial hydration
+  // Server-side rendering fallback
   if (!mounted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50">
         <Navigation />
         <main className="relative z-10">
           <HeroSection />
+          <FlowchartGraphics />
           <FeatureSection />
           <AIFunnelSection />
           <UseCasesSection />
@@ -85,8 +98,9 @@ export default function ClientWrapper() {
   }
 
   return (
-    <>
-      {/* Client-side only components with Suspense boundaries */}
+    <ErrorBoundary>
+      <PerformanceMonitor />
+
       <Suspense fallback={<div className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50" />}>
         <NeuralMeshBackground />
       </Suspense>
@@ -102,12 +116,33 @@ export default function ClientWrapper() {
       <Navigation />
 
       <main className="relative z-10">
-        <HeroSection />
-        <FeatureSection />
-        <AIFunnelSection />
-        <UseCasesSection />
-        <CTASection />
-        <TestimonialSection />
+        <ErrorBoundary>
+          <HeroSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <FlowchartGraphics />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <FeatureSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <AIFunnelSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <UseCasesSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <CTASection />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <TestimonialSection />
+        </ErrorBoundary>
       </main>
 
       {showCalendly && (
@@ -115,6 +150,6 @@ export default function ClientWrapper() {
           <CalendlyBadge />
         </Suspense>
       )}
-    </>
+    </ErrorBoundary>
   )
 }

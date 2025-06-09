@@ -3,14 +3,30 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Check, Sparkles } from "lucide-react"
+import { Check, Sparkles, Mail, Shield, Zap } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
 const features = [
-  "Understands your clients",
-  "Crafts outreach that sounds like you",
-  "Personalizes at scale",
-  "No templates. No guessing. Just conversions.",
+  {
+    icon: Mail,
+    title: "Verified emails gets up to 100% inbox rate",
+    description: "Our email verification system ensures maximum deliverability",
+  },
+  {
+    icon: Zap,
+    title: "Send up to 300 emails/day without getting banned",
+    description: "Smart sending patterns that respect provider limits",
+  },
+  {
+    icon: Shield,
+    title: "Understands your clients",
+    description: "AI analyzes prospect data for perfect personalization",
+  },
+  {
+    icon: Check,
+    title: "No templates. No guessing. Just conversions",
+    description: "Every email is uniquely crafted for maximum impact",
+  },
 ]
 
 export default function FeatureSection() {
@@ -51,35 +67,34 @@ export default function FeatureSection() {
         </motion.div>
 
         <motion.div
-          className="max-w-4xl mx-auto"
+          className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Card className="p-12 bg-gradient-to-br from-white/80 to-indigo-50/80 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 rounded-3xl">
-            <div className="grid md:grid-cols-2 gap-8">
-              {features.map((feature, index) => (
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
+            >
+              <Card className="p-8 h-full bg-gradient-to-br from-white/80 to-indigo-50/80 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 rounded-3xl group hover:scale-105">
                 <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
-                  className="flex items-center gap-4 group"
+                  className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                  whileHover={{ rotate: 5 }}
                 >
-                  <motion.div
-                    className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Check className="w-5 h-5 text-white" />
-                  </motion.div>
-                  <span className="text-xl font-semibold text-gray-800 group-hover:text-indigo-600 transition-colors">
-                    {feature}
-                  </span>
+                  <feature.icon className="w-8 h-8 text-white" />
                 </motion.div>
-              ))}
-            </div>
-          </Card>
+
+                <h3 className="text-xl font-bold mb-4 text-gray-900 group-hover:text-indigo-600 transition-colors">
+                  {feature.title}
+                </h3>
+
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+              </Card>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

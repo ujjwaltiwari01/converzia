@@ -47,6 +47,7 @@ export default function FlowchartGraphics() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
+          preserveAspectRatio="xMidYMid slice"
         >
           <defs>
             <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -129,14 +130,14 @@ export default function FlowchartGraphics() {
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+          <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 relative">
             {flowSteps.map((step, index) => (
               <motion.div
                 key={step.title}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="relative flex-1"
+                className="relative flex-1 flex"
               >
                 {/* Animated Connecting Arrows */}
                 {index < flowSteps.length - 1 && (
@@ -191,7 +192,7 @@ export default function FlowchartGraphics() {
                 )}
 
                 <motion.div
-                  className={`relative bg-gradient-to-br ${step.color} p-8 rounded-3xl shadow-2xl text-white text-center group hover:scale-105 transition-all duration-300 overflow-hidden`}
+                  className={`relative bg-gradient-to-br ${step.color} p-8 rounded-3xl shadow-2xl text-white text-center group hover:scale-105 transition-all duration-300 overflow-hidden flex-1 flex flex-col justify-between min-h-[280px]`}
                   whileHover={{ y: -5 }}
                 >
                   {/* Animated Background Pattern */}

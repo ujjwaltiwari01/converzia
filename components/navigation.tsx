@@ -39,7 +39,7 @@ export default function Navigation() {
         event_label: "Navigation Book Demo",
       })
 
-      window.open("https://calendly.com/ujjwal-it2023-24-recabn/15min", "_blank", "noopener,noreferrer")
+      window.open("https://calendly.com/ujjwal-converzia/15min", "_blank", "noopener,noreferrer")
     }
   }
 

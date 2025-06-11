@@ -78,6 +78,27 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
 
+        {/* Calendly badge widget */}
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.onload = function() { 
+                if (typeof Calendly !== 'undefined') {
+                  Calendly.initBadgeWidget({ 
+                    url: 'https://calendly.com/ujjwal-converzia/15min', 
+                    text: 'Schedule time with me', 
+                    color: '#0069ff', 
+                    textColor: '#ffffff' 
+                  }); 
+                }
+              }
+            `,
+          }}
+        />
+
         {/* Structured Data */}
         <script
           type="application/ld+json"

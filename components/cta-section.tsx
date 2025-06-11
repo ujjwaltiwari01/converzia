@@ -19,7 +19,7 @@ export default function CTASection() {
         event_label: "Main CTA Book Demo",
       })
 
-      window.open("https://calendly.com/ujjwal-it2023-24-recabn/15min", "_blank", "noopener,noreferrer")
+      window.open("https://calendly.com/ujjwal-converzia/15min", "_blank", "noopener,noreferrer")
     }
   }
 
@@ -111,14 +111,7 @@ export default function CTASection() {
             <div className="mt-8 space-y-4">
               <p className="text-indigo-200 text-lg">
                 Or email us directly at{" "}
-                <a
-                  href="mailto:ujjwal.it2023-24@recabn.ac.in"
-                  onClick={handleEmailClick}
-                  className="text-white hover:text-indigo-200 transition-colors underline font-semibold focus-visible:outline-2 focus-visible:outline-white rounded"
-                  aria-label="Send email to Converzia team"
-                >
-                  ujjwal.it2023-24@recabn.ac.in
-                </a>
+                
               </p>
 
               <div className="flex items-center justify-center gap-6 text-indigo-200 text-sm">

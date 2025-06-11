@@ -6,6 +6,7 @@ import { useRef, useState } from "react"
 import { Rocket, Building2, Briefcase, ChevronDown, Star } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { event } from "@/lib/gtag"
 
 const useCases = [
   {
@@ -56,6 +57,17 @@ export default function UseCasesSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [expandedCard, setExpandedCard] = useState<number | null>(null)
+
+  const handleBookDemo = () => {
+    if (typeof window !== "undefined") {
+      event("click", {
+        event_category: "CTA",
+        event_label: "Use Cases Book Demo",
+      })
+
+      window.open("https://calendly.com/ujjwal-converzia/15min", "_blank", "noopener,noreferrer")
+    }
+  }
 
   return (
     <section id="use-cases" className="py-32 px-4 sm:px-6 lg:px-8 relative">
@@ -153,6 +165,19 @@ export default function UseCasesSection() {
                     <p className="text-sm text-gray-600 font-medium">— {useCase.testimonial.author}</p>
                   </motion.div>
                 )}
+                <motion.div
+                  className="mt-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 + 1 }}
+                >
+                  <Button
+                    onClick={handleBookDemo}
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
+                  >
+                    Book Free Demo
+                  </Button>
+                </motion.div>
               </Card>
             </motion.div>
           ))}

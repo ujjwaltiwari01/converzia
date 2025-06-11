@@ -38,7 +38,7 @@ export default function HeroSection() {
         event_label: "Hero Book Demo",
       })
 
-      window.open("https://calendly.com/ujjwal-it2023-24-recabn/15min", "_blank", "noopener,noreferrer")
+      window.open("https://calendly.com/ujjwal-converzia/15min", "_blank", "noopener,noreferrer")
     }
   }
 
@@ -70,27 +70,19 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="text-6xl lg:text-8xl font-black mb-8 leading-tight"
+            className="text-5xl lg:text-6xl font-black mb-8 leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <span className="bg-gradient-to-r from-gray-900 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-gray-900 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               AI Prospecting
             </span>
-            <br />
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Made For
             </span>
-            <br />
-            <span className="relative">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">B2B</span>
-              <motion.div
-                className="absolute -bottom-4 left-0 right-0 h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 1.2, duration: 1 }}
-              />
+            <span className="block bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              B2B
             </span>
           </motion.h1>
 

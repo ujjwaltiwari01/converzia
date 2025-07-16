@@ -111,7 +111,14 @@ export default function CTASection() {
             <div className="mt-8 space-y-4">
               <p className="text-indigo-200 text-lg">
                 Or email us directly at{" "}
-                
+                <a
+                  href="mailto:ujjwal.converzia@gmail.com"
+                  onClick={handleEmailClick}
+                  className="text-white hover:text-indigo-200 transition-colors underline font-semibold focus-visible:outline-2 focus-visible:outline-white rounded"
+                  aria-label="Send email to Converzia team"
+                >
+                  ujjwal.converzia@gmail.com
+                </a>
               </p>
 
               <div className="flex items-center justify-center gap-6 text-indigo-200 text-sm">

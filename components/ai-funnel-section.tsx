@@ -66,244 +66,42 @@ export default function AIFunnelSection() {
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 relative overflow-hidden">
-      {/* Ultra-Creative Background with Dynamic Elements */}
+      {/* Simplified Background with Subtle Elements */}
       <div className="absolute inset-0 opacity-20">
-        {/* Animated Circuit Board Pattern */}
-        <motion.svg
-          className="absolute inset-0 w-full h-full"
-          viewBox="0 0 1000 1000"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.1 }}
-          transition={{ duration: 2 }}
-        >
-          <defs>
-            <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#6366f1" />
-              <stop offset="50%" stopColor="#8b5cf6" />
-              <stop offset="100%" stopColor="#ec4899" />
-            </linearGradient>
-          </defs>
-          {/* Animated circuit paths */}
-          {Array.from({ length: 8 }).map((_, i) => (
-            <motion.path
-              key={i}
-              d={`M${100 + i * 120},50 Q${200 + i * 120},150 ${100 + i * 120},250 T${100 + i * 120},450`}
-              stroke="url(#circuitGrad)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="10,5"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 3, delay: i * 0.2, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
-            />
-          ))}
-        </motion.svg>
-
-        {/* Floating Data Nodes */}
-        {Array.from({ length: 15 }).map((_, i) => (
+        {/* Floating Data Nodes - Reduced count and simpler animation */}
+        {Array.from({ length: 8 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
+            className="absolute w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
             style={{
-              left: `${10 + ((i * 6) % 80)}%`,
-              top: `${15 + ((i * 7) % 70)}%`,
+              left: `${10 + ((i * 10) % 80)}%`,
+              top: `${15 + ((i * 12) % 70)}%`,
             }}
             animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.8, 0.3],
-              y: [0, -20, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.6, 0.2],
+              y: [0, -10, 0],
             }}
             transition={{
-              duration: 3 + (i % 3),
+              duration: 2 + (i % 2),
               repeat: Number.POSITIVE_INFINITY,
-              delay: i * 0.3,
+              delay: i * 0.4,
             }}
           />
         ))}
-
-        {/* AI Brain Network */}
-        <motion.div
-          className="absolute top-20 right-20 w-32 h-32"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              fill="none"
-              stroke="url(#circuitGrad)"
-              strokeWidth="1"
-              strokeDasharray="5,5"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="25"
-              fill="none"
-              stroke="url(#circuitGrad)"
-              strokeWidth="1"
-              strokeDasharray="3,3"
-            />
-            <circle cx="50" cy="50" r="10" fill="url(#circuitGrad)" opacity="0.6" />
-          </svg>
-        </motion.div>
-      </div>
-
-      {/* Floating geometric shapes */}
-      <motion.div
-        className="absolute top-1/4 left-1/3 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl"
-        animate={{
-          x: [0, 50, 0],
-          y: [0, -30, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-pink-400/20 to-orange-400/20 rounded-lg blur-lg rotate-45"
-        animate={{
-          rotate: [45, 225, 45],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
-      />
-
-      {/* AI Data Flow Visualization */}
-      <motion.div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-300 to-transparent">
-        <motion.div
-          className="absolute top-0 left-0 w-8 h-px bg-gradient-to-r from-indigo-500 to-purple-500"
-          animate={{ x: ["0%", "100%"] }}
-          transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-      </motion.div>
-
-      {/* Holographic Grid */}
-      <div className="absolute inset-0 opacity-30">
-        {/* Enhanced connecting lines between steps */}
-        {steps.map(
-          (_, index) =>
-            index < steps.length - 1 && (
-              <motion.div
-                key={`connection-${index}`}
-                className="absolute"
-                style={{
-                  top: `${20 + index * 24}%`,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  width: "2px",
-                  height: "24%",
-                }}
-                initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
-                transition={{ duration: 1, delay: index * 0.3 + 1 }}
-              >
-                {/* Main connecting line */}
-                <div className="w-full h-full bg-gradient-to-b from-indigo-400 via-purple-500 to-pink-500 rounded-full relative">
-                  {/* Animated pulse */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent rounded-full"
-                    animate={{
-                      y: ["-100%", "100%"],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Number.POSITIVE_INFINITY,
-                      delay: index * 0.5 + 2,
-                      ease: "easeInOut",
-                    }}
-                  />
-
-                  {/* Data flow indicators */}
-                  {Array.from({ length: 3 }).map((_, dotIndex) => (
-                    <motion.div
-                      key={dotIndex}
-                      className="absolute w-3 h-3 bg-white rounded-full shadow-lg border-2 border-indigo-400"
-                      style={{ left: "-5px" }}
-                      animate={{
-                        y: ["0%", "100%"],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Number.POSITIVE_INFINITY,
-                        delay: index * 0.5 + dotIndex * 1 + 2,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  ))}
-
-                  {/* Side branches for visual appeal */}
-                  <motion.div
-                    className="absolute top-1/3 -left-8 w-8 h-px bg-gradient-to-r from-indigo-400 to-transparent"
-                    initial={{ scaleX: 0 }}
-                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.3 + 1.5 }}
-                  />
-                  <motion.div
-                    className="absolute top-2/3 -right-8 w-8 h-px bg-gradient-to-l from-purple-400 to-transparent"
-                    initial={{ scaleX: 0 }}
-                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.3 + 1.8 }}
-                  />
-                </div>
-
-                {/* Success metrics floating beside the line */}
-                <motion.div
-                  className="absolute top-1/2 -right-20 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg border border-indigo-200 transform -translate-y-1/2"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: index * 0.3 + 2.5 }}
-                >
-                  <span className="text-xs font-bold text-indigo-600">
-                    {index === 0 && "99.9% Accuracy"}
-                    {index === 1 && "3sec Processing"}
-                    {index === 2 && "18% Reply Rate"}
-                    {index === 3 && "Real-time Analytics"}
-                  </span>
-                </motion.div>
-              </motion.div>
-            ),
-        )}
 
         {/* Background grid pattern */}
         <div
           className="w-full h-full opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(99, 102, 241, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(99, 102, 241, 0.3) 1px, transparent 1px),
-              linear-gradient(rgba(139, 92, 246, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(139, 92, 246, 0.2) 1px, transparent 1px)
+              linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)
             `,
-            backgroundSize: "50px 50px, 50px 50px, 10px 10px, 10px 10px",
+            backgroundSize: "50px 50px",
           }}
         />
       </div>
-
-      {/* Quantum Particles */}
-      {Array.from({ length: 25 }).map((_, i) => (
-        <motion.div
-          key={`quantum-${i}`}
-          className="absolute w-1 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            x: [0, Math.random() * 100 - 50],
-            y: [0, Math.random() * 100 - 50],
-            opacity: [0, 1, 0],
-            scale: [0, 1.5, 0],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Number.POSITIVE_INFINITY,
-            delay: Math.random() * 3,
-          }}
-        />
-      ))}
 
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -332,7 +130,7 @@ export default function AIFunnelSection() {
           </p>
         </motion.div>
 
-        {/* Enhanced Progress Line with animated graph */}
+        {/* Simplified Progress Line */}
         <div className="relative mb-16">
           <div className="absolute left-1/2 transform -translate-x-1/2 w-2 h-full bg-gradient-to-b from-gray-200 to-gray-300 rounded-full" />
           <motion.div
@@ -362,10 +160,10 @@ export default function AIFunnelSection() {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className={`flex items-center gap-12 ${index % 2 === 1 ? "flex-row-reverse" : ""}`}
             >
-              {/* Enhanced Step Content */}
+              {/* Step Content Card */}
               <div className="flex-1">
                 <Card className="p-8 bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 group hover:scale-105 rounded-2xl relative overflow-hidden">
-                  {/* Animated background gradient */}
+                  {/* Subtle background gradient */}
                   <motion.div
                     className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-5`}
                     animate={{ opacity: [0.05, 0.1, 0.05] }}
@@ -417,87 +215,32 @@ export default function AIFunnelSection() {
                 </Card>
               </div>
 
-              {/* Revolutionary Step Visualization with 3D Effects */}
+              {/* Simplified Step Visualization */}
               <div className="flex-1 flex justify-center relative">
                 <motion.div
                   className="relative"
-                  whileHover={{ scale: 1.1, rotateY: 15 }}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  style={{ perspective: "1000px" }}
                 >
-                  {/* Main 3D Circle */}
+                  {/* Main Circle */}
                   <motion.div
                     className={`w-40 h-40 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center border-4 border-white shadow-2xl relative overflow-hidden`}
                     animate={{
-                      rotateY: [0, 360],
-                      boxShadow: [
-                        "0 20px 40px rgba(99, 102, 241, 0.3)",
-                        "0 25px 50px rgba(139, 92, 246, 0.4)",
-                        "0 20px 40px rgba(99, 102, 241, 0.3)",
-                      ],
+                      scale: [1, 1.02, 1],
                     }}
                     transition={{
-                      rotateY: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-                      boxShadow: { duration: 3, repeat: Number.POSITIVE_INFINITY },
+                      scale: { duration: 3, repeat: Number.POSITIVE_INFINITY },
                     }}
                   >
-                    <span className="text-7xl relative z-10" style={{ transform: "rotateY(0deg)" }}>
-                      {step.emoji}
-                    </span>
+                    <span className="text-7xl relative z-10">{step.emoji}</span>
 
-                    {/* Holographic Overlay */}
+                    {/* Subtle pulsing overlay */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10 rounded-full"
-                      animate={{ opacity: [0.2, 0.6, 0.2] }}
+                      className="absolute inset-0 bg-white/20 rounded-full"
+                      animate={{ opacity: [0.2, 0.4, 0.2] }}
                       transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                     />
-
-                    {/* Energy Rings */}
-                    {Array.from({ length: 3 }).map((_, ringIndex) => (
-                      <motion.div
-                        key={ringIndex}
-                        className="absolute inset-0 border-2 border-white/30 rounded-full"
-                        animate={{
-                          scale: [1, 1.5, 1],
-                          opacity: [0.6, 0, 0.6],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Number.POSITIVE_INFINITY,
-                          delay: ringIndex * 0.7,
-                        }}
-                      />
-                    ))}
                   </motion.div>
-
-                  {/* Orbiting Data Points */}
-                  {Array.from({ length: 6 }).map((_, orbitIndex) => (
-                    <motion.div
-                      key={orbitIndex}
-                      className="absolute w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center"
-                      style={{
-                        top: "50%",
-                        left: "50%",
-                        transformOrigin: "0 0",
-                      }}
-                      animate={{
-                        rotate: 360,
-                        x: Math.cos((orbitIndex * 60 * Math.PI) / 180) * 80,
-                        y: Math.sin((orbitIndex * 60 * Math.PI) / 180) * 80,
-                      }}
-                      transition={{
-                        rotate: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-                        x: { duration: 0 },
-                        y: { duration: 0 },
-                      }}
-                    >
-                      <motion.div
-                        className="w-3 h-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: orbitIndex * 0.2 }}
-                      />
-                    </motion.div>
-                  ))}
 
                   {/* Success Metrics Floating Around */}
                   <motion.div

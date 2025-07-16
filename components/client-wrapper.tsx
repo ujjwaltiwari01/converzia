@@ -20,7 +20,8 @@ const FloatingElements = dynamic(() => import("@/components/floating-elements"),
   loading: () => null,
 })
 
-const CalendlyBadge = dynamic(() => import("@/components/calendly-badge"), {
+// New Calendly badge initializer component
+const CalendlyBadgeInitializer = dynamic(() => import("@/components/calendly-badge-initializer"), {
   ssr: false,
   loading: () => null,
 })
@@ -36,39 +37,11 @@ import CTASection from "@/components/cta-section"
 import TestimonialSection from "@/components/testimonial-section"
 
 export default function ClientWrapper() {
-  const [showCalendly, setShowCalendly] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-
-    let ticking = false
-    let lastScrollY = 0
-
-    const handleScroll = () => {
-      lastScrollY = window.scrollY
-
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (lastScrollY > 1000) {
-            setShowCalendly(true)
-          }
-          ticking = false
-        })
-
-        ticking = true
-      }
-    }
-
-    // Delay scroll listener to improve initial page load
-    const timer = setTimeout(() => {
-      window.addEventListener("scroll", handleScroll, { passive: true })
-    }, 2000)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener("scroll", handleScroll)
-    }
+    // No longer need scroll listener for Calendly badge as it's always initialized
   }, [])
 
   // Server-side rendering fallback
@@ -135,11 +108,10 @@ export default function ClientWrapper() {
         </ErrorBoundary>
       </main>
 
-      {showCalendly && (
-        <Suspense fallback={null}>
-          <CalendlyBadge />
-        </Suspense>
-      )}
+      {/* Calendly badge widget is now always initialized on the client */}
+      <Suspense fallback={null}>
+        <CalendlyBadgeInitializer />
+      </Suspense>
     </ErrorBoundary>
   )
 }

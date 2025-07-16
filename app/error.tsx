@@ -52,8 +52,8 @@ export default function Error({
         <div className="mt-8 text-sm text-gray-500">
           <p>
             If this problem persists, please contact us at{" "}
-            <a href="mailto:ujjwal.it2023-24@recabn.ac.in" className="text-red-600 hover:underline">
-              ujjwal.it2023-24@recabn.ac.in
+            <a href="mailto:ujjwal.converzia@gmail.com" className="text-red-600 hover:underline">
+              ujjwal.converzia@gmail.com
             </a>
           </p>
         </div>
